@@ -59,37 +59,103 @@
 
         </form>
 
+        <div v-if="is_login">  
         
-        <table class="customTable" v-if="is_login">
-          <thead>
-            <tr>
-              <th>
-                  Personal data
-              </th>
-              <th>
-                  Contact data
-              </th>
-              <th>
-                  Company data
-              </th>
-            </tr>
-          </thead>
-          <tbody>
+            <table class="customTable" >
+              <thead>
+                <tr>
+                  <th>
+                      Personal data
+                  </th>
+                  <th>
+                      Contact data
+                  </th>
+                  <th>
+                      Company data
+                  </th>
+                  <th>
+                      Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
 
-            <tr v-for="u in users">
-              <td>
-                  {{ u.name }}, {{ u.username }}
-              </td>
-              <td>
-                  {{ u.email }}, {{ u.phone }}
-              </td>
-              <td>
-                  {{ u.company.name }}, {{ u.company.bs }}
-              </td>
-            </tr>
-             
-          </tbody>
-        </table>
+                <tr v-for="u in users">
+                  <td>
+                      {{ u.name }}, {{ u.username }}
+                  </td>
+                  <td>
+                      {{ u.email }}, {{ u.phone }}
+                  </td>
+                  <td>
+                      {{ u.company.name }}, {{ u.company.bs }}
+                  </td>
+                  <td>
+                      <button @click="edit(u)">
+                          edit
+                      </button>
+                      <button @click="remove(u.id)">
+                          delete
+                      </button>
+                  </td>
+                </tr>
+                 
+              </tbody>
+            </table>
+
+
+            <button @click="action='add'">
+                Add new record
+            </button>
+
+            <div class="rendered-form" v-if="action=='add'">
+                <div class="">
+                    <h1 access="false">Add new user in list&nbsp;</h1></div>
+                <div >
+                    <label for="text-" >Full name</label>
+                    <input v-model="new_user.name" type="text" >
+                </div>
+                <div >
+                    <label for="text-" >Email</label>
+                    <input v-model="new_user.email" type="text" >
+                </div>
+                <div >
+                    <label for="text-" >Company name</label>
+                    <input v-model="new_user.company_name" type="text" >
+                </div>
+                <div >
+                    <button type="button" @click="save('create')">
+                        Save user data
+                    </button>
+                </div>
+            </div>
+
+            <div class="rendered-form" v-if="action=='edit'">
+                <div class="">
+                    <h1 access="false">Edit user</h1></div>
+                <div >
+                    <label for="text-" >Full name</label>
+                    <input v-model="new_user.name" type="text" >
+                </div>
+                <div >
+                    <label for="text-" >Email</label>
+                    <input v-model="new_user.email" type="text" >
+                </div>
+                <div >
+                    <label for="text-" >Company name</label>
+                    <input v-model="new_user.company_name" type="text" >
+                </div>
+
+                <input type="hidden" v-model="new_user.id">
+                <div >
+                    <button type="button" @click="save('update')">
+                        Save user data
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
         <!-- Generated at CSSPortal.com -->
 
 
@@ -157,7 +223,9 @@
         createApp({
             setup(){  
                 users = ref([]);
+                action = ref('');
                 email = ref('Sincere@april.biz'); password = ref('1234'); 
+                new_user = ref([]);
                 
                 let tmp = localStorage.getItem("is_login");
                 if (tmp == null) {
@@ -170,7 +238,9 @@
                     users,
                     email,
                     password,
-                    is_login
+                    is_login,
+                    action,
+                    new_user
                 }
             },
             mounted: function () {
@@ -221,6 +291,75 @@
                     if (!this.is_login) {
                         alert("Verifique su información")
                     }
+                },
+                edit(target)
+                {
+                    this.action = 'edit'; 
+
+                    this.new_user.name = target.name
+                    this.new_user.email = target.email
+                    this.new_user.company_name = target.company.name
+                    this.new_user.id = target.id
+                },
+                save(action)
+                {
+
+                    let company = [];
+                    company.name = this.new_user.company_name; 
+                    this.new_user.company = company;  
+                    
+                    if (action == 'create') {  
+                        
+                        this.new_user.id = microtime = (Date.now() % 1000) / 1000; 
+
+                        this.users.push( this.new_user )
+
+                        this.new_user = [];
+
+                        alert("Registro añadido correctamente") 
+
+                    }
+
+                    if (action == 'update') {
+
+                        this.users.forEach((user) => {
+
+                            if (user.id == this.new_user.id) {
+                                 
+                                user.name = this.new_user.name
+                                user.email = this.new_user.email
+                                user.company.name = this.new_user.company_name
+
+                                alert("Registro actualizado correctamente") 
+                            } 
+                            
+                        })
+
+                    }
+
+                    this.action = ''; 
+                },
+                remove(id)
+                {
+                    console.log(id)
+                    let c = 0;
+                    let i = 0;
+
+                    this.users.forEach((user) => {
+
+                        if (user.id == id) {
+                            console.log(user.id)
+                            i = c;
+                        }
+
+                        c++;
+                        
+                    })
+
+                    console.log(i)
+                    this.users.splice(i,1);
+
+
                 }
             }
         }).mount('#container_app')
