@@ -1,409 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        Avanzada TM
-    </title>
-    <style type="text/css">
-        body{
-            background-color: gray;
-        }
-        table.customTable {
-          width: 100%;
-          background-color: #FFFFFF;
-          border-collapse: collapse;
-          border-width: 2px;
-          border-color: #7ea8f8;
-          border-style: solid;
-          color: #000000;
-        }
-
-        table.customTable td, table.customTable th {
-          border-width: 2px;
-          border-color: #7ea8f8;
-          border-style: solid;
-          padding: 5px;
-        }
-
-        table.customTable thead {
-          background-color: #7ea8f8;
-        }
-
-    </style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>
+		Login
+	</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
-    <div class="container" id="container_app">
-        
-        <form v-if="!is_login">
-            
-            <fieldset>
-                <legend>
-                    Email:
-                </legend>
-                <input v-model="email" type="email" placeholder="write here" name="">
-            </fieldset>
+	<div class="container">
+		 
+	
+		<form>
+			<fieldset>
+				<legend>
+					<h2>
+						Formulario de acceso
+					</h2>
+				</legend>
+
+
+				<fieldset>
+					
+					<legend>
+						Correo electrónico
+					</legend>
+					<input type="" name="">
+
+				</fieldset>
+
+				<fieldset>
+					
+					<legend>
+						Contraseña
+					</legend>
+					<input type="" name="">
+
+				</fieldset>
+
+				<ul>
+					<li class="item-1">
+						<input type="checkbox" name=""> Administrador
+					</li>
+					<li class="item-2">
+						<input type="checkbox" name=""> Gerente
+					</li>
+					<li class="item-3">
+						<input type="checkbox" name=""> Propietario
+					</li>
+					<li class="item-4">
+						<input type="checkbox" name=""> Agente de ventas
+					</li>
+					<li class="item-5">
+						<input type="checkbox" name=""> Prospecto
+					</li>
+				</ul>
+
+				<button>
+					Acceder
+				</button>
+
+
+			</fieldset>
+
+			<a href="">
+				¿Olvidó su contraseña?
+			</a>
+
+		</form>
+
+	</div>
+
+
+	<form>
+		<input type="" placeholder="write here" name="">
+	</form>
 
-            <fieldset>
-                <legend>
-                    Password:
-                </legend>
-                <input v-model="password" type="password" placeholder="Write here" name="">
-            </fieldset>
-
-            <button @click="login" type="button">
-                Access
-            </button>
-
-        </form>
-
-        <div v-if="is_login">  
-        
-            <table class="customTable" >
-              <thead>
-                <tr>
-                  <th>
-                      Personal data
-                  </th>
-                  <th>
-                      Contact data
-                  </th>
-                  <th>
-                      Company data
-                  </th>
-                  <th>
-                      Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-
-                <tr v-for="u in users">
-                  <td>
-                      {{ u.name }}, {{ u.username }}
-                  </td>
-                  <td>
-                      {{ u.email }}, {{ u.phone }}
-                  </td>
-                  <td>
-                      {{ u.company.name }}, {{ u.company.bs }}
-                  </td>
-                  <td>
-                      <button @click="edit(u)">
-                          edit
-                      </button>
-                      <button @click="remove(u.id)">
-                          delete
-                      </button>
-                  </td>
-                </tr>
-                 
-              </tbody>
-            </table>
-
-
-            <button @click="action='add'">
-                Add new record
-            </button>
-
-            <div class="rendered-form" v-if="action=='add'">
-                <div class="">
-                    <h1 access="false">Add new user in list&nbsp;</h1></div>
-                <div >
-                    <label for="text-" >Full name</label>
-                    <input v-model="new_user.name" type="text" >
-                </div>
-                <div >
-                    <label for="text-" >Email</label>
-                    <input v-model="new_user.email" type="text" >
-                </div>
-                <div >
-                    <label for="text-" >Company name</label>
-                    <input v-model="new_user.company_name" type="text" >
-                </div>
-                <div >
-                    <button type="button" @click="save('create')">
-                        Save user data
-                    </button>
-                </div>
-            </div>
-
-            <div class="rendered-form" v-if="action=='edit'">
-                <div class="">
-                    <h1 access="false">Edit user</h1></div>
-                <div >
-                    <label for="text-" >Full name</label>
-                    <input v-model="new_user.name" type="text" >
-                </div>
-                <div >
-                    <label for="text-" >Email</label>
-                    <input v-model="new_user.email" type="text" >
-                </div>
-                <div >
-                    <label for="text-" >Company name</label>
-                    <input v-model="new_user.company_name" type="text" >
-                </div>
-
-                <input type="hidden" v-model="new_user.id">
-                <div >
-                    <button type="button" @click="save('update')">
-                        Save user data
-                    </button>
-                </div>
-            </div>
-
-
-        </div>
-        <!-- Generated at CSSPortal.com -->
-
-
-
-        <!-- <h1> hola {{ name }}</h1> 
-
-        <input type="text" v-model="name" name=""> 
-
-        <br>
-         
-        <button @click="count++"  >
-            Count is: {{ count }}
-        </button>
-
-        <br>
-
-        <input type="" v-model="num1" name="">
-        <input type="" v-model="num2" name="">
-        
-        <button @click="result=((+num1)+(+num2))">
-            Suma
-        </button>
-
-        <h3>
-            Resultado <span v-if="result!=0"> {{ result }} </span>
-        </h3>
-
-        <hr>
-
-        <ul> 
-            <li v-for="item in persons">
-                {{ item.name }} - {{ item.lastname }}
-            </li> 
-        </ul>
-
-        <form>  
-
-            <fieldset>
-                <legend>
-                    Nombre(s):
-                </legend>
-                <input type="text" v-model="username" name="">
-            </fieldset>
-
-            <fieldset>
-                <legend>
-                    Apellido(s):
-                </legend>
-                <input type="text" v-model="lastname" name="">
-            </fieldset>
-
-
-            <button type="button" v-on:click="addPerson">
-                Save data
-            </button>
-        </form> -->
-
-    </div>
-
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script type="text/javascript">
-
-        const { createApp, ref } = Vue
-
-        createApp({
-            setup(){  
-                users = ref([]);
-                action = ref('');
-                email = ref('Sincere@april.biz'); password = ref('1234'); 
-                new_user = ref([]);
-                
-                let tmp = localStorage.getItem("is_login");
-                if (tmp == null) {
-                    tmp = false
-                }
-
-                is_login = ref(tmp)    
-
-                return { 
-                    users,
-                    email,
-                    password,
-                    is_login,
-                    action,
-                    new_user
-                }
-            },
-            mounted: function () {
-                
-                const getUsers = async () => {
-                  
-                    const response = await fetch("users.json?v=1.1"); 
-                    const tmp_users = await response.json();  
-                    
-                    this.users = tmp_users;
-                } 
-
-                if (this.is_login) {
-                    getUsers() 
-                }
-                
-            },
-            methods:{
-                async login(){ 
-
-                    //1.- traer los datos
-                    const response = await fetch("users.json?v=1.1"); 
-                    this.users = await response.json(); 
-
-                    this.is_login = false;
-
-                    //2.- recorrer los datos
-                    this.users.forEach((user) => {
-
-                        //3.- comprobar si el usuario existe 
-
-                            if (this.email == user.email) {
-                                if (this.password == user.password) {  
-                                    this.is_login = true;
-                                    alert("Bienvenido")
-
-                                    //this.update(users)
-
-                                    localStorage.setItem("user_data", JSON.stringify(user));
-
-                                    localStorage.setItem("is_login","true");
-                                }
-                            }
-
-                        }   
-                    );
-
-                    if (!this.is_login) {
-                        alert("Verifique su información")
-                    }
-                },
-                edit(target)
-                {
-                    this.action = 'edit'; 
-
-                    this.new_user.name = target.name
-                    this.new_user.email = target.email
-                    this.new_user.company_name = target.company.name
-                    this.new_user.id = target.id
-                },
-                save(action)
-                {
-
-                    let company = [];
-                    company.name = this.new_user.company_name; 
-                    this.new_user.company = company;  
-                    
-                    if (action == 'create') {  
-                        
-                        this.new_user.id = microtime = (Date.now() % 1000) / 1000; 
-
-                        this.users.push( this.new_user )
-
-                        this.new_user = [];
-
-                        alert("Registro añadido correctamente") 
-
-                    }
-
-                    if (action == 'update') {
-
-                        this.users.forEach((user) => {
-
-                            if (user.id == this.new_user.id) {
-                                 
-                                user.name = this.new_user.name
-                                user.email = this.new_user.email
-                                user.company.name = this.new_user.company_name
-
-                                alert("Registro actualizado correctamente") 
-                            } 
-                            
-                        })
-
-                    }
-
-                    this.action = ''; 
-                },
-                remove(id)
-                {
-                    console.log(id)
-                    let c = 0;
-                    let i = 0;
-
-                    this.users.forEach((user) => {
-
-                        if (user.id == id) {
-                            console.log(user.id)
-                            i = c;
-                        }
-
-                        c++;
-                        
-                    })
-
-                    console.log(i)
-                    this.users.splice(i,1);
-
-
-                }
-            }
-        }).mount('#container_app')
-        
-        /*const { createApp, ref } = Vue
-
-        createApp({
-            setup(){ 
-                const message = "";
-                const name = "";
-                const num1 = 0,  num2 = 0, result = 0;
-                const username = ref(''), lastname = ref('');
-                const persons = ref([]);
-
-                return {
-                    name: ref(''),
-                    count: ref(0),
-                    num1: ref(0),
-                    num2: ref(0),
-                    result: ref(0),
-                    username,
-                    lastname,
-                    persons
-
-                }
-            },
-            methods:{
-                addPerson(){
-
-                    const person = {
-                        name:this.username, 
-                        lastname:this.lastname
-                    } 
-
-                    this.persons.push(person)
-                     
-                }
-            }
-        }).mount('#container_app')*/
-
-    </script>
 </body>
 </html>
-
-
-
-
