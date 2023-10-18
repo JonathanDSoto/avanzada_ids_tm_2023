@@ -1,82 +1,92 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>
-		Login
-	</title>
-	<link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Access
+		</title>
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+		<style type="text/css">
+			body{
+				background-color: color(srgb 0.8195 0.8196 0.8111);
+			}
+			.logo{
+				max-width: 70px;
+			}
+			.bg_login{
+				background: url(assets/img/bd_login.jpg) no-repeat center center fixed; 
+			  -webkit-background-size: cover;
+			  -moz-background-size: cover;
+			  -o-background-size: cover;
+			  background-size: cover;
+			}
+		</style>
+	</head>
+	<body> 
 
-	<div class="container">
-		 
-	
-		<form>
-			<fieldset>
-				<legend>
-					<h2>
-						Formulario de acceso
-					</h2>
-				</legend>
-
-
-				<fieldset>
+		<div class="container d-flex flex-column min-vh-100">
+			
+			<div class="row d-flex flex-grow-1 align-items-center">
+				
+				<div class="col">
 					
-					<legend>
-						Correo electrónico
-					</legend>
-					<input type="" name="">
+					<div class="row">
+						
+						<div class="col-lg-6 col-md-4 rounded-start shadow-lg  bg_login"> 
+						</div>
+						
+						<div class="col-lg-6 col-md-8 bg-light rounded-end shadow-lg "> 
 
-				</fieldset>
+							<form class="m-5">
 
-				<fieldset>
-					
-					<legend>
-						Contraseña
-					</legend>
-					<input type="" name="">
+								<img class="img-fluid img-thumbnail logo mt-4" src="assets/img/mcdonalds-logo.webp">
 
-				</fieldset>
+								<h3 class="mt-4 mb-3">
+									Sign into your account
+								</h3>
 
-				<ul>
-					<li class="item-1">
-						<input type="checkbox" name=""> Administrador
-					</li>
-					<li class="item-2">
-						<input type="checkbox" name=""> Gerente
-					</li>
-					<li class="item-3">
-						<input type="checkbox" name=""> Propietario
-					</li>
-					<li class="item-4">
-						<input type="checkbox" name=""> Agente de ventas
-					</li>
-					<li class="item-5">
-						<input type="checkbox" name=""> Prospecto
-					</li>
-				</ul>
+							  <div class="mb-3">
+							    <label for="exampleInputEmail1" class="form-label">Email address</label>
+							    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+							    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+							  </div>
+							  <div class="mb-3">
+							    <label for="exampleInputPassword1" class="form-label">Password</label>
+							    <input type="password" class="form-control" id="exampleInputPassword1">
+							  </div>
+							  <div class="mb-3 form-check">
+							    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+							    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+							  </div> 
 
-				<button>
-					Acceder
-				</button>
+							  	<div class="d-grid gap-2">
+								  <button type="submit" class="btn btn-dark  ">
+								  	Submit
+								  </button>
+								</div>
 
+							</form>
 
-			</fieldset>
+						</div> 
 
-			<a href="">
-				¿Olvidó su contraseña?
-			</a>
+					</div>
 
-		</form>
+				</div>
+				
 
-	</div>
+			</div>
+			
+		</div>
 
-
-	<form>
-		<input type="" placeholder="write here" name="">
-	</form>
-
-</body>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	</body>
 </html>
+
+
+
+
+
+
+
+
